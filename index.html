@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b18">
+<title>VYORA — JEE & NEET Learning</title>
+<meta name="description" content="Explore JEE and NEET lectures, subjects and study resources with VYORA.">
+
+<style>
+:root{
+  --bg:#070b18;
+  --panel:#0e162a;
+  --panel2:#121e37;
+  --line:#263451;
+  --text:#f4f6ff;
+  --muted:#9eacc8;
+  --purple:#a78bfa;
+  --blue:#60a5fa;
+  --cyan:#67e8f9;
+  --green:#34d399;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Arial,sans-serif;
+  line-height:1.55;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:2px solid var(--cyan);outline-offset:3px
+}
+.container{width:min(1160px,92%);margin:auto}
+.muted{color:var(--muted)}
+header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(7,11,24,.91);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line)
+}
+.nav{min-height:72px;display:flex;align-items:center;gap:20px}
+.brand{font-weight:950;font-size:24px;letter-spacing:3px}
+.brand b{
+  background:linear-gradient(100deg,var(--purple),var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.brand small{
+  display:block;font-size:8px;letter-spacing:2px;
+  color:var(--muted);font-weight:700
+}
+.navlinks{display:flex;gap:23px;margin:auto;color:var(--muted);font-size:13px}
+.navlinks a:hover{color:var(--cyan)}
+.navright{display:flex;gap:8px}
+.iconbtn{
+  background:var(--panel);color:var(--text);
+  border:1px solid var(--line);border-radius:12px;padding:9px 12px
+}
+.menu{display:none}
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 85% 15%,#282056 0,transparent 43%),
+    radial-gradient(ellipse at 15% 85%,#102d49 0,transparent 42%)
+}
+.hero-inner{
+  min-height:430px;padding:75px 0 58px;
+  display:grid;grid-template-columns:1.2fr .8fr;
+  gap:35px;align-items:center
+}
+.eyebrow{
+  color:var(--cyan);font-size:11px;letter-spacing:2px;
+  font-weight:800
+}
+h1{font-size:clamp(39px,6vw,68px);line-height:1.08;
+  letter-spacing:-2px;margin:17px 0}
+.gradient{
+  background:linear-gradient(95deg,#c4b5fd,#60a5fa,#67e8f9);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero p{max-width:520px;color:var(--muted);font-size:15px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;padding:12px 18px;border-radius:12px;
+  font-weight:800;font-size:13px;border:1px solid var(--line)
+}
+.primary{
+  background:linear-gradient(110deg,#8b5cf6,#6366f1);
+  border:0;color:white;box-shadow:0 6px 28px #7355eb32
+}
+.secondary{background:var(--panel)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}
+.hero-art{
+  min-height:280px;display:grid;place-items:center;
+  border:1px solid #6b63b34b;border-radius:28px;
+  background:
+    radial-gradient(ellipse at 50% 40%,#33307775,transparent 65%),
+    linear-gradient(145deg,#121d39,#080d1b);
+  position:relative;overflow:hidden
+}
+.orbit{
+  width:180px;height:180px;border:1px solid #a78bfa7a;
+  border-radius:50%;display:grid;place-items:center;
+  box-shadow:0 0 70px #8b5cf629;
+  animation:float 5s ease-in-out infinite
+}
+.orbit span{font-size:78px;color:#c4b5fd;text-shadow:0 0 35px #8b5cf6}
+.art-label{
+  position:absolute;bottom:20px;left:20px;right:20px;
+  border:1px solid #ffffff18;background:#090f21b8;
+  border-radius:14px;padding:12px 15px;font-size:12px
+}
+.art-label strong{display:block;font-size:15px}
+.art-label span{color:var(--muted)}
+@keyframes float{50%{transform:translateY(-10px)}}
+@keyframes glow{50%{box-shadow:0 0 32px #8b5cf640}}
+@keyframes appear{from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}}
+section{padding:38px 0}
+.section-head{margin-bottom:21px}
+.section-head h2{margin:0;font-size:clamp(24px,4vw,31px);letter-spacing:-.7px}
+.section-head p{color:var(--muted);font-size:13px;margin:5px 0}
+.search-area{
+  display:grid;grid-template-columns:1fr 270px;gap:20px;
+  align-items:stretch
+}
+.searchbox{
+  position:relative;border:1px solid #6555b8;
+  background:var(--panel);border-radius:17px;padding:12px;
+  box-shadow:0 0 28px #8b5cf610
+}
+.searchrow{display:flex;gap:10px;align-items:center}
+.searchrow input{
+  flex:1;min-width:0;background:transparent;border:0;outline:none;
+  color:var(--text);padding:8px
+}
+.searchrow input:focus-visible{outline:none}
+.searchrow input::placeholder{color:var(--muted)}
+.suggestions{padding:10px 0 0}
+.suggest-title{font-size:11px;color:var(--muted);padding:6px 8px}
+.suggestion{
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:9px 8px;border:0;border-radius:9px;
+  color:var(--text);background:transparent;text-align:left;font-size:13px
+}
+.suggestion:hover,.suggestion:focus-visible{background:var(--panel2)}
+.suggestion span:first-child{color:var(--purple)}
+.quick{
+  border:1px solid var(--line);background:var(--panel);
+  border-radius:17px;padding:19px
+}
+.quick h3{font-size:13px;margin:0 0 14px}
+.quickgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.quickbtn{
+  border:1px solid var(--line);background:var(--panel2);
+  color:var(--text);border-radius:10px;padding:10px 7px;font-size:12px
+}
+.quickbtn:hover{border-color:var(--purple)}
+.subject-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.subject{
+  min-width:0;position:relative;overflow:hidden;
+  padding:20px;border:1px solid var(--line);border-radius:17px;
+  text-align:left;color:var(--text);background:var(--panel);
+  transition:transform .25s,border-color .25s,background .25s
+}
+.subject:hover{transform:translateY(-5px);border-color:var(--tone);background:var(--panel2)}
+.subject.active{border-color:var(--tone);box-shadow:inset 0 0 25px #ffffff08}
+.subject-icon{
+  display:grid;place-items:center;width:48px;height:48px;
+  border-radius:14px;background:color-mix(in srgb,var(--tone) 15%,transparent);
+  color:var(--tone);font-size:25px;border:1px solid color-mix(in srgb,var(--tone) 55%,transparent)
+}
+.subject h3{font-size:17px;margin:13px 0 4px}
+.subject p{font-size:12px;color:var(--muted);margin:0}
+.subject small{display:block;color:var(--tone);margin-top:14px;font-size:11px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.field{
+  min-width:0;flex:1;background:var(--panel);color:var(--text);
+  border:1px solid var(--line);border-radius:10px;padding:11px 13px
+}
+.toolbar select{flex:0 1 155px}
+.course-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.card{
+  min-width:0;overflow:hidden;border:1px solid var(--line);
+  background:linear-gradient(150deg,#111a30,#0b1222);
+  border-radius:17px;transition:transform .25s,border-color .25s
+}
+.card:hover{transform:translateY(-3px);border-color:#6656b4}
+.video{aspect-ratio:16/9;background:#03050a}
+.video iframe{width:100%;height:100%;border:0}
+.video-placeholder{
+  height:100%;min-height:160px;display:grid;place-items:center;
+  text-align:center;background:radial-gradient(ellipse,#252052,#080d1b);
+  color:var(--muted);padding:20px
+}
+.video-placeholder .play{font-size:36px;color:var(--purple)}
+.cardbody{padding:17px}
+.meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pill{
+  font-size:10px;color:#c4b5fd;background:#262047;
+  border:1px solid #504083;border-radius:30px;padding:4px 9px
+}
+.card h3{font-size:19px;margin:12px 0 5px}
+.card p{color:var(--muted);font-size:13px;margin:0 0 15px}
+.cardfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.textlink{color:var(--cyan);font-weight:750;font-size:12px}
+.smallbtn{
+  border:1px solid var(--line);background:var(--panel2);
+  color:var(--text);border-radius:9px;padding:8px 11px;font-size:12px
+}
+.playlist{
+  margin-top:14px;border-top:1px solid var(--line);padding-top:12px
+}
+.playlist summary{cursor:pointer;font-size:12px;color:var(--purple);font-weight:800}
+.lesson{
+  width:100%;display:flex;align-items:center;gap:10px;
+  text-align:left;background:transparent;border:0;border-radius:9px;
+  padding:10px 6px;color:var(--text);font-size:12px
+}
+.lesson:hover{background:var(--panel2)}
+.lesson .number{color:var(--purple);font-weight:900}
+.lesson .state{margin-left:auto;color:var(--muted);font-size:10px}
+.lesson:disabled{opacity:.6;cursor:default}
+.empty{color:var(--muted);padding:25px 0}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feature{
+  border:1px solid var(--line);background:var(--panel);
+  border-radius:16px;padding:21px
+}
+.feature .emoji{font-size:25px}
+.feature h3{margin:10px 0 5px;font-size:16px}
+.feature p{color:var(--muted);font-size:13px;margin:0}
+.quote{
+  border:1px solid #4f4388;border-radius:19px;padding:25px;
+  background:radial-gradient(ellipse at right,#282052,#0e162a 70%)
+}
+.quote blockquote{margin:0;font-size:clamp(20px,4vw,28px);font-weight:800}
+.quote p{font-size:12px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:12px}
+.footerrow{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.reveal{animation:appear .65s both}
+@media(min-width:850px){
+  .reveal:nth-child(2){animation-delay:.06s}
+  .reveal:nth-child(3){animation-delay:.12s}
+  .reveal:nth-child(4){animation-delay:.18s}
+}
+@media(max-width:760px){
+  .hero-inner{grid-template-columns:1fr;padding:53px 0 35px;gap:25px}
+  .hero-art{min-height:220px}
+  .orbit{width:140px;height:140px}
+  .orbit span{font-size:60px}
+  .search-area{grid-template-columns:1fr}
+  .subject-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feature-grid{grid-template-columns:1fr}
+  .navlinks{gap:13px}
+  .nav{gap:10px}
+  .brand{font-size:20px}
+}
+@media(max-width:480px){
+  .nav{min-height:62px}
+  .navlinks{gap:10px;font-size:11px}
+  .navright{display:none}
+  .brand{font-size:17px;letter-spacing:2px}
+  .brand small{font-size:7px}
+  .hero-inner{padding-top:43px}
+  h1{letter-spacing:-1.3px}
+  .course-grid{grid-template-columns:1fr}
+  .subject{padding:14px}
+  .subject h3{font-size:15px}
+  section{padding:29px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#home" class="brand">VYORA<b>.</b>
+      <small>JEE · NEET · BEYOND</small>
+    </a>
+    <nav class="navlinks">
+      <a href="#home">Home</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#courses">Lectures</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="navright">
+      <a class="iconbtn" href="#searchBox" aria-label="Search">⌕</a>
+    </div>
+    <button class="iconbtn menu" id="menuBtn" aria-label="Show navigation">☰</button>
+  </div>
+</header>
+
+<main id="home">
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="reveal">
+      <span class="eyebrow">YOUR GOALS. OUR MISSION.</span>
+      <h1>Crack JEE & NEET<br>with <span class="gradient">VYORA.</span></h1>
+      <p>Structured learning. Clear concepts. Consistent practice.
+      Build your foundation and move closer to your goals, one lecture at a time.</p>
+      <div class="actions">
+        <a class="btn primary" href="#courses">Start learning →</a>
+        <a class="btn secondary" href="#subjects">Explore subjects</a>
+      </div>
+    </div>
+    <div class="hero-art reveal" aria-label="VYORA learning identity">
+      <div class="orbit"><span>V</span></div>
+      <div class="art-label">
+        <strong>Dream. Study. Achieve.</strong>
+        <span>Your journey begins with one concept.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container search-area">
+    <div class="searchbox" id="searchBox">
+      <div class="searchrow">
+        <span aria-hidden="true">⌕</span>
+        <input id="search" type="search" autocomplete="off"
+          placeholder="Search chapters, topics or lectures..."
+          aria-label="Search lectures" aria-controls="suggestions">
+        <button class="iconbtn" id="clearSearch" type="button">×</button>
+      </div>
+      <div class="suggestions" id="suggestions">
+        <div class="suggest-title">POPULAR SEARCHES</div>
+        <div id="suggestionList"></div>
+      </div>
+    </div>
+    <aside class="quote">
+      <blockquote>“Discipline today builds the freedom you want tomorrow.”</blockquote>
+      <p>— VYORA</p>
+    </aside>
+  </div>
+</section>
+
+<section id="subjects">
+  <div class="container">
+    <div class="section-head">
+      <h2>Explore subjects</h2>
+      <p>Choose your path. Master every concept.</p>
+    </div>
+    <div class="subject-grid">
+      <button class="subject" style="--tone:#60a5fa" data-subject="Physics">
+        <span class="subject-icon">⚛</span>
+        <h3>Physics</h3><p>Motion to modern physics</p><small>Explore lectures →</small>
+      </button>
+      <button class="subject" style="--tone:#34d399" data-subject="Chemistry">
+        <span class="subject-icon">⚗</span>
+        <h3>Chemistry</h3><p>Physical · Organic · Inorganic</p><small>Explore lectures →</small>
+      </button>
+      <button class="subject" style="--tone:#fbbf24" data-subject="Mathematics">
+        <span class="subject-icon">∑</span>
+        <h3>Mathematics</h3><p>Algebra · Calculus · Geometry</p><small>Explore lectures →</small>
+      </button>
+      <button class="subject" style="--tone:#f472b6" data-subject="Biology">
+        <span class="subject-icon">❋</span>
+        <h3>Biology</h3><p>NEET concepts and revision</p><small>Explore lectures →</small>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="courses">
+  <div class="container">
+    <div class="section-head">
+      <h2>Your learning library</h2>
+      <p>Search, filter and open a lecture.</p>
+    </div>
+    <div class="toolbar">
+      <input class="field" id="courseSearch"
+        placeholder="Find a course..." aria-label="Filter courses">
+      <select class="field" id="examFilter" aria-label="Filter exam">
+        <option value="All">All exams</option>
+        <option value="JEE">JEE</option>
+        <option value="NEET">NEET</option>
+      </select>
+      <select class="field" id="subjectFilter" aria-label="Filter subject">
+        <option value="All">All subjects</option>
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Mathematics</option>
+        <option>Biology</option>
+      </select>
+    </div>
+    <div class="course-grid" id="courseGrid"></div>
+    <p class="empty" id="empty" hidden>No matching lectures. Try another search.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <h2>Built for focused learners</h2>
+      <p>A simple, organized space for your learning journey.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature reveal">
+        <span class="emoji">▶</span><h3>Video lectures</h3>
+        <p>Learn concepts through organized video lessons.</p>
+      </article>
+      <article class="feature reveal">
+        <span class="emoji">▤</span><h3>Study resources</h3>
+        <p>Add your notes, formula sheets and practice material.</p>
+      </article>
+      <article class="feature reveal">
+        <span class="emoji">◎</span><h3>Keep progressing</h3>
+        <p>Build a consistent study routine and revisit difficult topics.</p>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footerrow">
+    <strong>VYORA. · JEE · NEET · BEYOND</strong>
+    <span>Independent educational project · Learn with purpose.</span>
+  </div>
+</footer>
+
+<script>
+/*
+ Add lectures by editing the courses array below.
+ For a YouTube URL, use only the video ID.
+ Use a real video ID only after confirming it is the right lecture.
+*/
+const courses = [
+  {
+    id:"laws-motion",
+    subject:"Physics",
+    exam:"JEE",
+    title:"Laws of Motion",
+    chapter:"Mechanics",
+    description:"Newton's laws and the fundamentals of force and motion.",
+    video:"7ob4PtmHZEQ",
+    lecture:"Lecture 01"
+  },
+  {
+    id:"straight-line",
+    subject:"Physics",
+    exam:"JEE",
+    title:"Motion in a Straight Line",
+    chapter:"Kinematics",
+    description:"Displacement, velocity, acceleration and motion graphs.",
+    video:"",
+    lecture:"Coming soon"
+  },
+  {
+    id:"motion-plane",
+    subject:"Physics",
+    exam:"JEE",
+    title:"Motion in a Plane",
+    chapter:"Kinematics",
+    description:"Vectors and two-dimensional motion.",
+    video:"",
+    lecture:"Coming soon"
+  },
+  {
+    id:"chemical-bonding",
+    subject:"Chemistry",
+    exam:"JEE",
+    title:"Chemical Bonding",
+    chapter:"Inorganic Chemistry",
+    description:"Learn bonding models, molecular shapes and related concepts.",
+    video:"",
+    lecture:"Coming soon"
+  },
+  {
+    id:"atomic-structure",
+    subject:"Chemistry",
+    exam:"JEE",
+    title:"Atomic Structure",
+    chapter:"Physical Chemistry",
+    description:"Explore atomic models and electronic structure.",
+    video:"",
+    lecture:"Coming soon"
+  },
+  {
+    id:"quadratic",
+    subject:"Mathematics",
+    exam:"JEE",
+    title:"Quadratic Equations",
+    chapter:"Algebra",
+    description:"Build algebra skills and practise quadratic equations.",
+    video:"",
+    lecture:"Coming soon"
+  },
+  {
+    id:"cell",
+    subject:"Biology",
+    exam:"NEET",
+    title:"Cell: The Unit of Life",
+    chapter:"Cell Biology",
+    description:"Explore cell structure and the functions of organelles.",
+    video:"",
+    lecture:"Coming soon"
+  },
+  {
+    id:"human-physiology",
+    subject:"Biology",
+    exam:"NEET",
+    title:"Human Physiology",
+    chapter:"Biology",
+    description:"Organize your study of the human body's systems.",
+    video:"",
+    lecture:"Coming soon"
+  }
+];
+
+const $ = id => document.getElementById(id);
+let activeSubject = "All";
+let activeVideo = "";
+
+function make(tag, cls, text) {
+  const el = document.createElement(tag);
+  if (cls) el.className = cls;
+  if (text !== undefined) el.textContent = text;
+  return el;
+}
+
+function playLecture(course) {
+  if (!course.video) return;
+  activeVideo = course.id;
+  renderCourses();
+}
+
+function renderCourses() {
+  const query = $("courseSearch").value.trim().toLowerCase();
+  const exam = $("examFilter").value;
+  const subject = $("subjectFilter").value;
+  const grid = $("courseGrid");
+  grid.replaceChildren();
+
+  const list = courses.filter(c => {
+    const matchSubject = activeSubject === "All" ||
+      c.subject === activeSubject;
+    const matchFilter = subject === "All" || c.subject === subject;
+    const matchExam = exam === "All" || c.exam === exam;
+    const searchable = [
+      c.title,c.subject,c.exam,c.chapter,c.description
+    ].join(" ").toLowerCase();
+    return matchSubject && matchFilter && matchExam &&
+      searchable.includes(query);
+  });
+
+  $("empty").hidden = list.length > 0;
+
+  list.forEach((c, index) => {
+    const card = make("article", "card reveal");
+    card.style.animationDelay = Math.min(index * 45, 180) + "ms";
+
+    if (c.video && activeVideo === c.id) {
+      const wrap = make("div", "video");
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(c.video);
+      iframe.title = c.title + " lecture";
+      iframe.loading = "lazy";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      wrap.append(iframe);
+      card.append(wrap);
+    } else {
+      const placeholder = make("div", "video");
+      const inside = make("div", "video-placeholder");
+      inside.append(make("div", "play", c.video ? "▶" : "✦"));
+      inside.append(make("div", "", c.video ? "Watch lecture" : "Lecture coming soon"));
+      if (c.video) {
+        inside.tabIndex = 0;
+        inside.setAttribute("role", "button");
+        inside.setAttribute("aria-label", "Play " + c.title);
+        inside.addEventListener("click", () => playLecture(c));
+        inside.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            playLecture(c);
+          }
+        });
+      }
+      placeholder.append(inside);
+      card.append(placeholder);
+    }
+
+    const body = make("div", "cardbody");
+    const meta = make("div", "meta");
+    meta.append(make("span", "pill", c.subject));
+    meta.append(make("span", "muted", c.exam));
+    body.append(meta);
+    body.append(make("h3", "", c.title));
+    body.append(make("p", "", c.description));
+
+    const foot = make("div", "cardfoot");
+    foot.append(make("span", "muted", c.lecture));
+
+    if (c.video) {
+      const watch = make("button", "smallbtn",
+        activeVideo === c.id ? "Close player" : "Play lecture ▶");
+      watch.type = "button";
+      watch.addEventListener("click", () => {
+        activeVideo = activeVideo === c.id ? "" : c.id;
+        renderCourses();
+      });
+      foot.append(watch);
+
+      const external = make("a", "textlink", "YouTube ↗");
+      external.href = "https://www.youtube.com/watch?v=" +
+        encodeURIComponent(c.video);
+      external.target = "_blank";
+      external.rel = "noopener noreferrer";
+      foot.append(external);
+    }
+
+    body.append(foot);
+
+    if (c.id === "laws-motion") {
+      const details = document.createElement("details");
+      details.className = "playlist";
+      const summary = make("summary", "", "LECTURE DETAILS");
+      details.append(summary);
+      details.append(make("p", "muted",
+        "Chapter: " + c.chapter +
+        ". Use the embedded player or open the original video on YouTube."));
+      body.append(details);
+    }
+
+    card.append(body);
+    grid.append(card);
+  });
+}
+
+function selectSubject(subject) {
+  activeSubject = activeSubject === subject ? "All" : subject;
+  document.querySelectorAll(".subject").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.subject === activeSubject);
+  });
+  $("subjectFilter").value = "All";
+  renderCourses();
+  $("courses").scrollIntoView({behavior:"smooth"});
+}
+
+document.querySelectorAll(".subject").forEach(btn => {
+  btn.addEventListener("click", () => selectSubject(btn.dataset.subject));
+});
+
+$("courseSearch").addEventListener("input", renderCourses);
+$("examFilter").addEventListener("change", renderCourses);
+$("subjectFilter").addEventListener("change", renderCourses);
+
+/* Search suggestions */
+const popular = [
+  "Laws of Motion",
+  "Chemical Bonding",
+  "Quadratic Equations",
+  "Human Physiology",
+  "Motion in a Straight Line",
+  "Atomic Structure",
+  "Motion in a Plane"
+];
+
+function renderSuggestions() {
+  const query = $("search").value.trim().toLowerCase();
+  const box = $("suggestionList");
+  box.replaceChildren();
+
+  const matches = popular.filter(s => s.toLowerCase().includes(query)).slice(0,5);
+  if (!matches.length) {
+    box.append(make("div", "suggest-title", "No suggestions yet. Try a subject name."));
+    return;
+  }
+
+  matches.forEach(title => {
+    const btn = make("button", "suggestion");
+    btn.type = "button";
+    btn.append(make("span", "", "⌕"));
+    btn.append(make("span", "", title));
+    btn.addEventListener("click", () => {
+      $("search").value = title;
+      $("courseSearch").value = title;
+      $("suggestions").hidden = true;
+      renderCourses();
+      $("courses").scrollIntoView({behavior:"smooth"});
+    });
+    box.append(btn);
+  });
+}
+
+$("search").addEventListener("input", renderSuggestions);
+$("search").addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    $("courseSearch").value = $("search").value;
+    $("suggestions").hidden = true;
+    renderCourses();
+    $("courses").scrollIntoView({behavior:"smooth"});
+  }
+});
+
+$("clearSearch").addEventListener("click", () => {
+  $("search").value = "";
+  $("courseSearch").value = "";
+  $("suggestions").hidden = false;
+  renderSuggestions();
+  renderCourses();
+  $("search").focus();
+});
+
+$("menuBtn").addEventListener("click", () => {
+  const nav = document.querySelector(".navlinks");
+  const open = nav.dataset.open === "true";
+  nav.dataset.open = String(!open);
+  nav.style.display = open ? "" : "flex";
+  if (!open) {
+    nav.style.flexDirection = "column";
+    nav.style.position = "absolute";
+    nav.style.top = "62px";
+    nav.style.left = "4%";
+    nav.style.right = "4%";
+    nav.style.padding = "18px";
+    nav.style.background = "#0e162a";
+    nav.style.border = "1px solid #263451";
+    nav.style.borderRadius = "14px";
+  } else {
+    nav.removeAttribute("style");
+  }
+});
+
+document.querySelectorAll(".navlinks a").forEach(a => {
+  a.addEventListener("click", () => {
+    const nav = document.querySelector(".navlinks");
+    if (window.innerWidth <= 480) {
+      nav.removeAttribute("style");
+      nav.dataset.open = "false";
+    }
+  });
+});
+
+renderSuggestions();
+renderCourses();
+</script>
+</body>
+</html>
