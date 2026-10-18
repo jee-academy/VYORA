@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070b18">
+<title>VYORA — JEE · NEET · BEYOND</title>
+<style>
+:root {
+  --bg: #070b18;
+  --panel: #10182b;
+  --line: #26344f;
+  --text: #f4f7ff;
+  --muted: #a4afc5;
+  --blue: #80aaff;
+  --cyan: #5de5df;
+  --purple: #a995ff;
+  --pink: #ed78bd;
+  --gold: #f3c75b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.55;
+}
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(7,11,24,.96);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 17px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.brand { display: flex; flex-direction: column; line-height: 1.05; }
+.brand-name {
+  font-size: clamp(1.8rem,4vw,2.25rem);
+  font-weight: 900;
+  letter-spacing: .09em;
+}
+.brand-name span { color: var(--cyan); }
+.brand-tag {
+  font-size: .66rem;
+  letter-spacing: .27em;
+  color: var(--muted);
+  font-weight: 700;
+  margin-top: 7px;
+}
+nav { display: flex; gap: 22px; color: var(--muted); }
+nav a:hover { color: white; }
+.menu-btn {
+  display: none;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  color: white;
+  padding: 8px 12px;
+}
+main { max-width: 1200px; margin: auto; padding: 0 24px; }
+.hero {
+  min-height: 450px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 35px;
+  align-items: center;
+  padding: 60px 0;
+}
+.eyebrow {
+  color: var(--cyan);
+  font-size: .78rem;
+  letter-spacing: .17em;
+  font-weight: 800;
+}
+h1 {
+  font-size: clamp(2.8rem,6vw,5.2rem);
+  line-height: 1.02;
+  letter-spacing: -.055em;
+  margin: 18px 0 22px;
+  font-weight: 900;
+}
+.gradient {
+  background: linear-gradient(100deg,#f6f8ff,#a995ff,#5de5df);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero p { color: var(--muted); font-size: 1.12rem; max-width: 570px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  padding: 12px 18px;
+  border-radius: 13px;
+  font-weight: 800;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.btn.primary {
+  background: linear-gradient(100deg,#a995ff,#6baaff);
+  color: #071020;
+  border: 0;
+}
+.hero-art {
+  min-height: 280px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 70% 25%,rgba(93,229,223,.18),transparent 30%),
+    radial-gradient(circle at 30% 70%,rgba(169,149,255,.22),transparent 35%),
+    var(--panel);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.orbit {
+  width: 210px;
+  height: 210px;
+  border: 1px solid rgba(169,149,255,.6);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.orbit-core { font-size: 2.7rem; font-weight: 900; }
+.float-label {
+  position: absolute;
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  background: #0b1223;
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: .85rem;
+}
+.label-a { top: 22px; left: 22px; }
+.label-b { right: 20px; bottom: 26px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  margin-bottom: 70px;
+}
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 17px; padding: 17px; }
+.stat strong { display: block; font-size: 1.1rem; }
+.stat span { color: var(--muted); font-size: .87rem; }
+section { margin: 0 0 75px; }
+.section-head { margin-bottom: 25px; }
+h2 { font-size: clamp(1.8rem,4vw,2.55rem); margin: 0 0 10px; font-weight: 850; }
+.section-head p { color: var(--muted); margin: 0; }
+.subject-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.subject-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+  min-height: 215px;
+  cursor: pointer;
+  transition: .2s;
+}
+.subject-card:hover { transform: translateY(-4px); border-color: #566d9c; }
+.subject-icon {
+  height: 58px;
+  width: 58px;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  border: 1px solid currentColor;
+}
+.subject-card h3 { margin: 0 0 8px; }
+.subject-card p { color: var(--muted); margin: 0 0 15px; }
+.explore { color: var(--blue); font-weight: 700; }
+.library-tools {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 12px;
+  margin: 22px 0;
+}
+.control {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: white;
+  padding: 14px 16px;
+  min-width: 0;
+}
+select option { background: var(--panel); }
+.course-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+.course-card {
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  min-width: 0;
+}
+.course-media {
+  aspect-ratio: 16/9;
+  background: #0b1223;
+  position: relative;
+  overflow: hidden;
+}
+.course-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media-placeholder {
+  height: 100%;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  text-align: center;
+}
+.play-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid #596b96;
+  color: var(--cyan);
+}
+.course-media.is-playable { cursor: pointer; }
+.course-media.is-playable:after {
+  content: "▶";
+  position: absolute;
+  right: 13px;
+  bottom: 13px;
+  background: rgba(5,10,20,.86);
+  border-radius: 9px;
+  padding: 8px 11px;
+}
+.course-body { padding: 18px; }
+.pills { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px; }
+.pill {
+  font-size: .72rem;
+  color: var(--cyan);
+  background: rgba(93,229,223,.08);
+  border: 1px solid rgba(93,229,223,.2);
+  padding: 4px 8px;
+  border-radius: 100px;
+}
+.pill.exam { color: #c2b5ff; }
+.course-body h3 { font-size: 1.12rem; margin: 0 0 8px; }
+.course-body p { color: var(--muted); font-size: .91rem; margin: 0 0 16px; }
+.course-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.watch { border: 0; background: transparent; color: var(--cyan); font-weight: 800; padding: 5px 0; }
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 35px 18px;
+  border: 1px dashed var(--line);
+  border-radius: 18px;
+  color: var(--muted);
+}
+.about-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
+.about-card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 22px; }
+.about-card strong { display: block; margin-bottom: 7px; }
+.about-card p { margin: 0; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding: 28px 24px; color: var(--muted); text-align: center; }
+footer strong { color: white; }
+#toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  background: #17243b;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 11px 16px;
+  display: none;
+}
+@media(max-width:850px) {
+  .hero { grid-template-columns: 1fr; }
+  .subject-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .course-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .about-grid { grid-template-columns: 1fr; }
+}
+@media(max-width:560px) {
+  .nav { padding: 15px 18px; }
+  .brand-name { font-size: 1.9rem; }
+  nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 16px 20px;
+    background: #0a1020;
+    flex-direction: column;
+  }
+  nav.open { display: flex; }
+  .menu-btn { display: block; }
+  main { padding: 0 18px; }
+  .hero { padding: 42px 0 35px; }
+  .hero-art { min-height: 215px; }
+  h1 { font-size: 3.15rem; }
+  .stats { gap: 8px; }
+  .stat { padding: 12px; }
+  .subject-card { padding: 18px; }
+  .library-tools { grid-template-columns: 1fr; }
+  .course-grid { grid-template-columns: 1fr; }
+  .course-body { padding: 16px; }
+  section { margin-bottom: 60px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="brand" href="#home">
+      <span class="brand-name">VYORA<span>.</span></span>
+      <span class="brand-tag">JEE · NEET · BEYOND</span>
+    </a>
+    <nav id="siteNav">
+      <a href="#home">Home</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#lectures">Lectures</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div>
+      <div class="eyebrow">✦ YOUR NEXT CHAPTER STARTS HERE</div>
+      <h1>Learn with focus.<br><span class="gradient">Rise beyond.</span></h1>
+      <p>A calm, organized learning space for JEE and NEET aspirants. Find a chapter, open a lecture, and keep moving forward—one concept at a time.</p>
+      <div class="actions">
+        <a class="btn primary" href="#lectures">Explore lectures ↗</a>
+        <a class="btn" href="#subjects">Browse subjects</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="float-label label-a">✦ Learn at your pace</div>
+      <div class="orbit"><div class="orbit-core">V.</div></div>
+      <div class="float-label label-b">JEE · NEET · BEYOND</div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><strong>One library</strong><span>Chapters in one place</span></div>
+    <div class="stat"><strong>Learn freely</strong><span>Easy access to lectures</span></div>
+    <div class="stat"><strong>Keep going</strong><span>One topic at a time</span></div>
+  </div>
+
+  <section id="subjects">
+    <div class="section-head">
+      <h2>Explore by subject</h2>
+      <p>Choose a subject and jump into your learning library.</p>
+    </div>
+    <div class="subject-grid">
+      <article class="subject-card" data-subject="Physics">
+        <div class="subject-icon" style="color:#80aaff">⌁</div>
+        <h3>Physics</h3><p>Motion to modern physics</p>
+        <span class="explore">Explore lectures →</span>
+      </article>
+      <article class="subject-card" data-subject="Chemistry">
+        <div class="subject-icon" style="color:#5de5df">⚗</div>
+        <h3>Chemistry</h3><p>Physical · Organic · Inorganic</p>
+        <span class="explore">Explore lectures →</span>
+      </article>
+      <article class="subject-card" data-subject="Mathematics">
+        <div class="subject-icon" style="color:#f3c75b">∑</div>
+        <h3>Mathematics</h3><p>Algebra · Calculus · Geometry</p>
+        <span class="explore">Explore lectures →</span>
+      </article>
+      <article class="subject-card" data-subject="Biology">
+        <div class="subject-icon" style="color:#ed78bd">✳</div>
+        <h3>Biology</h3><p>NEET concepts and revision</p>
+        <span class="explore">Explore lectures →</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="lectures">
+    <div class="section-head">
+      <h2>Your learning library</h2>
+      <p>Search, filter and open a lecture.</p>
+    </div>
+    <div class="library-tools">
+      <input class="control" id="searchInput" type="search" placeholder="Search chapters or topics…">
+      <select class="control" id="examFilter">
+        <option value="All">All exams</option>
+        <option value="JEE">JEE</option>
+        <option value="NEET">NEET</option>
+      </select>
+      <select class="control" id="subjectFilter">
+        <option value="All">All subjects</option>
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Mathematics</option>
+        <option>Biology</option>
+      </select>
+    </div>
+    <div class="course-grid" id="courseGrid"></div>
+  </section>
+
+  <section id="about">
+    <div class="section-head">
+      <h2>Built for focused learners</h2>
+      <p>A simple, organized space for your learning journey.</p>
+    </div>
+    <div class="about-grid">
+      <article class="about-card"><strong>✦ Find it quickly</strong><p>Search and filter to locate a chapter without scrolling through everything.</p></article>
+      <article class="about-card"><strong>▶ Learn in one place</strong><p>Lectures with a YouTube ID show their thumbnail and open in the built-in player.</p></article>
+      <article class="about-card"><strong>∞ Keep it growing</strong><p>Add more lectures by editing the course list—no separate thumbnail URL needed.</p></article>
+    </div>
+  </section>
+</main>
+
+<footer><strong>VYORA.</strong> · JEE · NEET · BEYOND<br>Keep learning. Keep rising.</footer>
+<div id="toast" role="status"></div>
+
+<script>
+"use strict";
+
+/* Add your lectures here.
+   For a YouTube link like https://youtu.be/gQms8pI1KP0
+   the video ID is gQms8pI1KP0.
+   Thumbnail URLs are generated automatically. */
+const courses = [
+  {
+    id: "laws-motion",
+    subject: "Physics",
+    exam: "JEE",
+    title: "Laws of Motion",
+    chapter: "Mechanics",
+    description: "Newton's laws, free-body diagrams and applications.",
+    video: "7ob4PtmHZEQ",
+    lecture: "Lecture 01"
+  },
+  {
+    id: "straight-line",
+    subject: "Physics",
+    exam: "JEE",
+    title: "Motion in a Straight Line",
+    chapter: "Kinematics",
+    description: "Displacement, velocity and acceleration.",
+    video: "gQms8pI1KP0",
+    lecture: "Lecture 01"
+  },
+  {
+    id: "motion-plane",
+    subject: "Physics",
+    exam: "JEE",
+    title: "Motion in a Plane",
+    chapter: "Kinematics",
+    description: "Vectors and two-dimensional motion.",
+    video: "",
+    lecture: "Coming soon"
+  },
+  {
+    id: "chemical-bonding",
+    subject: "Chemistry",
+    exam: "JEE",
+    title: "Chemical Bonding",
+    chapter: "Inorganic Chemistry",
+    description: "Understand bonds, shapes and molecular structure.",
+    video: "",
+    lecture: "Coming soon"
+  },
+  {
+    id: "atomic-structure",
+    subject: "Chemistry",
+    exam: "JEE",
+    title: "Atomic Structure",
+    chapter: "Physical Chemistry",
+    description: "Explore atomic models and electronic structure.",
+    video: "",
+    lecture: "Coming soon"
+  },
+  {
+    id: "quadratic-equations",
+    subject: "Mathematics",
+    exam: "JEE",
+    title: "Quadratic Equations",
+    chapter: "Algebra",
+    description: "Roots, relationships and problem-solving methods.",
+    video: "",
+    lecture: "Coming soon"
+  },
+  {
+    id: "cell-unit-life",
+    subject: "Biology",
+    exam: "NEET",
+    title: "Cell: The Unit of Life",
+    chapter: "Cell Biology",
+    description: "Cell structures and their functions.",
+    video: "",
+    lecture: "Coming soon"
+  },
+  {
+    id: "human-physiology",
+    subject: "Biology",
+    exam: "NEET",
+    title: "Human Physiology",
+    chapter: "Biology",
+    description: "An introduction to the body's major systems.",
+    video: "",
+    lecture: "Coming soon"
+  }
+];
+
+const courseGrid = document.getElementById("courseGrid");
+const searchInput = document.getElementById("searchInput");
+const examFilter = document.getElementById("examFilter");
+const subjectFilter = document.getElementById("subjectFilter");
+const toast = document.getElementById("toast");
+let activeVideo = null;
+let toastTimer;
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.style.display = "none";
+  }, 2400);
+}
+
+function playLecture(course) {
+  if (!course.video) {
+    showToast("This lecture is coming soon.");
+    return;
+  }
+  activeVideo = activeVideo === course.id ? null : course.id;
+  renderCourses();
+}
+
+function renderCourses() {
+  const query = searchInput.value.trim().toLowerCase();
+  const exam = examFilter.value;
+  const subject = subjectFilter.value;
+
+  const filtered = courses.filter(course => {
+    const searchable = [
+      course.title, course.chapter, course.subject,
+      course.description, course.exam
+    ].join(" ").toLowerCase();
+
+    const matchesText = searchable.includes(query);
+    const matchesExam = exam === "All" || course.exam === exam;
+    const matchesSubject = subject === "All" || course.subject === subject;
+
+    return matchesText && matchesExam && matchesSubject;
+  });
+
+  courseGrid.replaceChildren();
+
+  if (filtered.length === 0) {
+    courseGrid.append(el("div", "empty", "No lectures found. Try another search."));
+    return;
+  }
+
+  filtered.forEach(course => {
+    const card = el("article", "course-card");
+    const media = el("div", "course-media");
+
+    if (course.video && activeVideo === course.id) {
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(course.video) + "?autoplay=1&rel=0";
+      iframe.title = course.title;
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      iframe.style.cssText = "width:100%;height:100%;min-height:190px;border:0;position:absolute;inset:0";
+      media.style.position = "relative";
+      media.dataset.playerFor = course.id;
+      media.append(iframe);
+    } else if (course.video) {
+      const img = document.createElement("img");
+      img.src = "https://img.youtube.com/vi/" +
+        encodeURIComponent(course.video) + "/mqdefault.jpg";
+      img.alt = course.title + " thumbnail";
+      img.loading = "lazy";
+      img.onerror = () => {
+        img.onerror = null;
+        img.src = "https://img.youtube.com/vi/" +
+          encodeURIComponent(course.video) + "/hqdefault.jpg";
+      };
+
+      media.classList.add("is-playable");
+      media.tabIndex = 0;
+      media.setAttribute("role", "button");
+      media.setAttribute("aria-label", "Play " + course.title);
+      media.append(img);
+      media.addEventListener("click", () => playLecture(course));
+      media.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          playLecture(course);
+        }
+      });
+    } else {
+      const placeholder = el("div", "media-placeholder");
+      placeholder.append(el("div", "play-icon", "✦"));
+      placeholder.append(el("div", "", "Lecture coming soon"));
+      media.append(placeholder);
+    }
+
+    const body = el("div", "course-body");
+    const pills = el("div", "pills");
+    pills.append(el("span", "pill", course.subject));
+    pills.append(el("span", "pill exam", course.exam));
+    body.append(pills);
+    body.append(el("h3", "", course.title));
+    body.append(el("p", "", course.description));
+
+    const footer = el("div", "course-footer");
+    footer.append(el("span", "", course.chapter + " · " + course.lecture));
+
+    const button = el(
+      "button",
+      "watch",
+      course.video
+        ? (activeVideo === course.id ? "Close player ×" : "Watch lecture →")
+        : "Coming soon"
+    );
+    button.type = "button";
+    button.addEventListener("click", () => playLecture(course));
+    footer.append(button);
+    body.append(footer);
+
+    card.append(media, body);
+    courseGrid.append(card);
+  });
+}
+
+searchInput.addEventListener("input", renderCourses);
+examFilter.addEventListener("change", renderCourses);
+subjectFilter.addEventListener("change", renderCourses);
+
+document.querySelectorAll(".subject-card").forEach(card => {
+  card.addEventListener("click", () => {
+    subjectFilter.value = card.dataset.subject;
+    renderCourses();
+    document.getElementById("lectures").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+const siteNav = document.getElementById("siteNav");
+const menuBtn = document.getElementById("menuBtn");
+
+menuBtn.addEventListener("click", () => {
+  const isOpen = siteNav.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(isOpen));
+});
+
+siteNav.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => siteNav.classList.remove("open"));
+});
+
+renderCourses();
+</script>
+</body>
+</html>
