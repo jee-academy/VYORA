@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -242,6 +241,7 @@ section{padding:38px 0}
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:12px}
 .footerrow{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .reveal{animation:appear .65s both}
+
 @media(min-width:850px){
   .reveal:nth-child(2){animation-delay:.06s}
   .reveal:nth-child(3){animation-delay:.12s}
@@ -261,7 +261,21 @@ footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-s
 }
 @media(max-width:480px){
   .nav{min-height:62px}
-  .navlinks{gap:10px;font-size:11px}
+  .navlinks{display:none;} /* Hid by default on mobile */
+  .navlinks.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 62px;
+    left: 4%;
+    right: 4%;
+    padding: 18px;
+    background: #0e162a;
+    border: 1px solid #263451;
+    border-radius: 14px;
+    gap: 15px;
+  }
+  .menu{display:block;} /* Reveal hamburger menu button */
   .navright{display:none}
   .brand{font-size:17px;letter-spacing:2px}
   .brand small{font-size:7px}
@@ -576,30 +590,30 @@ function renderCourses() {
       wrap.append(iframe);
       card.append(wrap);
     } else {
-const placeholder = make("div", "video");
+      const placeholder = make("div", "video");
 
-if (c.video) {
-  const img = document.createElement("img");
+      if (c.video) {
+        const img = document.createElement("img");
+        img.src = `https://img.youtube.com/vi/${c.video}/mqdefault.jpg`;
+        img.alt = c.title + " thumbnail";
+        img.loading = "lazy";
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
 
-  img.src = `https://img.youtube.com/vi/${c.video}/mqdefault.jpg`;
-  img.alt = c.title + " thumbnail";
-  img.loading = "lazy";
-  img.style.width = "100%";
-  img.style.height = "100%";
-  img.style.objectFit = "cover";
+        placeholder.append(img);
+        placeholder.style.cursor = "pointer";
+        placeholder.addEventListener("click", () => playLecture(c));
+      } else {
+        const inside = make("div", "video-placeholder");
+        inside.append(make("div", "play", "✦"));
+        inside.append(make("div", "", "Lecture coming soon"));
+        placeholder.append(inside);
+      }
 
-  placeholder.append(img);
-  placeholder.style.cursor = "pointer";
+      card.append(placeholder);
+    } // FIXED: Missing bracket added here
 
-  placeholder.addEventListener("click", () => playLecture(c));
-} else {
-  const inside = make("div", "video-placeholder");
-  inside.append(make("div", "play", "✦"));
-  inside.append(make("div", "", "Lecture coming soon"));
-  placeholder.append(inside);
-}
-
-card.append(placeholder);
     const body = make("div", "cardbody");
     const meta = make("div", "meta");
     meta.append(make("span", "pill", c.subject));
@@ -722,33 +736,16 @@ $("clearSearch").addEventListener("click", () => {
   $("search").focus();
 });
 
+/* FIXED: Mobile Menu Toggle using CSS classes */
 $("menuBtn").addEventListener("click", () => {
   const nav = document.querySelector(".navlinks");
-  const open = nav.dataset.open === "true";
-  nav.dataset.open = String(!open);
-  nav.style.display = open ? "" : "flex";
-  if (!open) {
-    nav.style.flexDirection = "column";
-    nav.style.position = "absolute";
-    nav.style.top = "62px";
-    nav.style.left = "4%";
-    nav.style.right = "4%";
-    nav.style.padding = "18px";
-    nav.style.background = "#0e162a";
-    nav.style.border = "1px solid #263451";
-    nav.style.borderRadius = "14px";
-  } else {
-    nav.removeAttribute("style");
-  }
+  nav.classList.toggle("open");
 });
 
 document.querySelectorAll(".navlinks a").forEach(a => {
   a.addEventListener("click", () => {
     const nav = document.querySelector(".navlinks");
-    if (window.innerWidth <= 480) {
-      nav.removeAttribute("style");
-      nav.dataset.open = "false";
-    }
+    nav.classList.remove("open");
   });
 });
 
