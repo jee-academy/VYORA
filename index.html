@@ -609,9 +609,16 @@ function renderCourses() {
       img.loading = "lazy";
       img.onerror = () => {
         img.onerror = null;
-        img.src = "https://img.youtube.com/vi/" +
-          encodeURIComponent(course.video) + "/hqdefault.jpg";
-      };
+        
+img.src = "https://img.youtube.com/vi/" +
+  encodeURIComponent(course.video) + "/maxresdefault.jpg";
+
+img.onerror = () => {
+  img.onerror = null;
+  img.src = "https://img.youtube.com/vi/" +
+    encodeURIComponent(course.video) + "/hqdefault.jpg";
+};
+
 
       media.classList.add("is-playable");
       media.tabIndex = 0;
