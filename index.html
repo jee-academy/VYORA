@@ -458,7 +458,6 @@ const courses = [
     description:"Displacement, velocity, acceleration and motion graphs.",
     video:"gQms8pI1KP0",
     lecture:"Lecture 02"
-     thumbnail: "https://img.youtube.com/vi/gQms8pI1KP0/mqdefault.jpg",
   },
   {
     id:"motion-plane",
@@ -577,26 +576,30 @@ function renderCourses() {
       wrap.append(iframe);
       card.append(wrap);
     } else {
-      const placeholder = make("div", "video");
-      const inside = make("div", "video-placeholder");
-      inside.append(make("div", "play", c.video ? "▶" : "✦"));
-      inside.append(make("div", "", c.video ? "Watch lecture" : "Lecture coming soon"));
-      if (c.video) {
-        inside.tabIndex = 0;
-        inside.setAttribute("role", "button");
-        inside.setAttribute("aria-label", "Play " + c.title);
-        inside.addEventListener("click", () => playLecture(c));
-        inside.addEventListener("keydown", e => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            playLecture(c);
-          }
-        });
-      }
-      placeholder.append(inside);
-      card.append(placeholder);
-    }
+const placeholder = make("div", "video");
 
+if (c.video) {
+  const img = document.createElement("img");
+
+  img.src = `https://img.youtube.com/vi/${c.video}/mqdefault.jpg`;
+  img.alt = c.title + " thumbnail";
+  img.loading = "lazy";
+  img.style.width = "100%";
+  img.style.height = "100%";
+  img.style.objectFit = "cover";
+
+  placeholder.append(img);
+  placeholder.style.cursor = "pointer";
+
+  placeholder.addEventListener("click", () => playLecture(c));
+} else {
+  const inside = make("div", "video-placeholder");
+  inside.append(make("div", "play", "✦"));
+  inside.append(make("div", "", "Lecture coming soon"));
+  placeholder.append(inside);
+}
+
+card.append(placeholder);
     const body = make("div", "cardbody");
     const meta = make("div", "meta");
     meta.append(make("span", "pill", c.subject));
